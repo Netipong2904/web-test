@@ -1,0 +1,152 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: white;
+}
+
+/* Header */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 38px;
+
+    border-bottom: 4px solid black;
+
+    background: white;
+
+    z-index: 10;
+}
+
+.logo {
+    font-size: 20px;
+    padding-left: 10px;
+    letter-spacing: 5px;
+}
+
+/* Main */
+
+main {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Image */
+
+.image-container {
+    width: 84vw;
+    height: calc(100vh - 38px);
+
+    margin-top: 38px;
+
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: opacity 0.2s ease;
+}
+
+/* Arrow */
+
+.arrow {
+    position: absolute;
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 82px;
+    height: 82px;
+
+    border: 5px solid black;
+    border-radius: 50%;
+
+    background: white;
+
+    font-size: 55px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 5;
+}
+
+.arrow:hover {
+    background: #eeeeee;
+}
+
+.arrow:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.left {
+    left: 25px;
+}
+
+.right {
+    right: 25px;
+}
+
+/* Bottom buttons */
+
+.options {
+    position: absolute;
+
+    bottom: 65px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 150px;
+
+    z-index: 6;
+}
+
+.options button {
+    width: 100px;
+    height: 58px;
+
+    border: 5px solid black;
+
+    background: white;
+
+    cursor: pointer;
+}
+
+.options button:hover {
+    background: #eeeeee;
+}
+
+.options button:active {
+    transform: scale(0.95);
+}

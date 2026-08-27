@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Game</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">ศูนย์กีฬาเฉลิมพระเกียรติ</div>
+    </header>
+
+    <main>
+
+        <!-- รูปภาพ -->
+        <div class="image-container">
+            <img id="mainImage" src="img/pic1.jpg" alt="Image">
+        </div>
+
+        <!-- ปุ่มซ้าย -->
+        <button class="arrow left" onclick="previousImage()">
+            ←
+        </button>
+
+        <!-- ปุ่มขวา -->
+        <button class="arrow right" onclick="nextImage()">
+            →
+        </button>
+
+        <!-- ปุ่มด้านล่าง -->
+        <div class="options">
+            <button>MAP</button>
+            <button>button</button>
+            <button>button</button>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
