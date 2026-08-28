@@ -29,6 +29,12 @@ body {
 }
 
 body {
+    position: fixed;
+    inset: 0;
+    overscroll-behavior: none;
+}
+
+body {
     font-family: 'Inter', Arial, sans-serif;
     background: var(--ink);
     color: var(--paper);
