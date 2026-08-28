@@ -55,7 +55,6 @@ header {
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
     padding: 0 18px;
 
@@ -80,27 +79,6 @@ header {
 
 .logo span {
     color: var(--amber-deep);
-}
-
-.counter {
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 2px;
-
-    background: var(--ink);
-    color: var(--amber);
-
-    padding: 5px 10px;
-    border-radius: 3px;
-
-    flex-shrink: 0;
-}
-
-.counter-sep {
-    color: var(--paper);
-    opacity: 0.4;
-    margin: 0 2px;
 }
 
 /* ================= Main / Image ================= */
@@ -258,40 +236,73 @@ main {
     z-index: 6;
 }
 
-.options button {
-    min-width: 116px;
-    height: 46px;
-    padding: 0 20px;
+.option-btn {
+    position: relative;
 
-    border: var(--line) solid var(--ink);
-    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 108px;
+    height: 50px;
+    padding: 0 22px 0 16px;
+
+    border: none;
+    border-radius: 999px;
+    border-top: 3px solid var(--amber);
 
     background: var(--paper);
     color: var(--ink);
 
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+    box-shadow: 0 6px 0 var(--ink), 0 10px 16px rgba(0, 0, 0, 0.35);
 
     cursor: pointer;
 
-    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
-.options button:hover {
+.option-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    background: var(--ink);
+    color: var(--amber);
+
+    flex-shrink: 0;
+}
+
+.option-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.option-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 0 var(--ink), 0 16px 20px rgba(0, 0, 0, 0.4);
+}
+
+.option-btn:hover .option-icon {
     background: var(--amber);
-    border-color: var(--amber);
+    color: var(--ink);
 }
 
-.options button:focus-visible {
+.option-btn:focus-visible {
     outline: 3px solid var(--amber);
-    outline-offset: 3px;
+    outline-offset: 4px;
 }
 
-.options button:active {
-    transform: scale(0.96);
+.option-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 0 var(--ink), 0 6px 10px rgba(0, 0, 0, 0.35);
 }
 
 /* ================= Responsive ================= */
@@ -322,11 +333,20 @@ main {
         gap: 8px;
     }
 
-    .options button {
+    .option-btn {
         min-width: 0;
-        padding: 0 12px;
-        font-size: 12px;
-        height: 40px;
+        padding: 0 14px 0 10px;
+        height: 42px;
+        gap: 7px;
+    }
+
+    .option-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .option-label {
+        font-size: 11px;
     }
 
     .dots {
