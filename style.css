@@ -32,6 +32,7 @@ body {
     position: fixed;
     inset: 0;
     overscroll-behavior: none;
+    height: var(--app-height, 100%);
 }
 
 body {
