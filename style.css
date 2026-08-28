@@ -1,3 +1,21 @@
+/* ===================================================
+   Token system
+   Ink   #14181f   deep near-black navy (frames, header)
+   Paper #f5f3ee   warm off-white
+   Amber #e8a33d   track-lane accent
+   Amber-deep #c97f1e  hover / active
+   Teal  #2f6f6b   secondary accent (inactive dots)
+   =================================================== */
+
+:root {
+    --ink: #14181f;
+    --paper: #f5f3ee;
+    --amber: #e8a33d;
+    --amber-deep: #c97f1e;
+    --teal: #2f6f6b;
+    --line: 4px;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -11,11 +29,21 @@ body {
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: white;
+    font-family: 'Inter', Arial, sans-serif;
+    background: var(--ink);
+    color: var(--paper);
 }
 
-/* Header */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+/* ================= Header ================= */
 
 header {
     position: fixed;
@@ -23,22 +51,59 @@ header {
     left: 0;
 
     width: 100%;
-    height: 38px;
+    height: 52px;
 
-    border-bottom: 4px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    background: white;
+    padding: 0 18px;
+
+    border-bottom: var(--line) solid var(--ink);
+
+    background: var(--paper);
+    color: var(--ink);
 
     z-index: 10;
 }
 
 .logo {
-    font-size: 20px;
-    padding-left: 10px;
-    letter-spacing: 5px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Main */
+.logo span {
+    color: var(--amber-deep);
+}
+
+.counter {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 2px;
+
+    background: var(--ink);
+    color: var(--amber);
+
+    padding: 5px 10px;
+    border-radius: 3px;
+
+    flex-shrink: 0;
+}
+
+.counter-sep {
+    color: var(--paper);
+    opacity: 0.4;
+    margin: 0 2px;
+}
+
+/* ================= Main / Image ================= */
 
 main {
     position: relative;
@@ -51,15 +116,13 @@ main {
     justify-content: center;
 }
 
-/* Image */
-
 .image-container {
-    width: 84vw;
-    height: calc(100vh - 38px);
-
-    margin-top: 38px;
+    width: 100vw;
+    height: 100vh;
 
     overflow: hidden;
+
+    background: var(--ink);
 }
 
 .image-container img {
@@ -70,10 +133,25 @@ main {
 
     display: block;
 
-    transition: opacity 0.2s ease;
+    opacity: 1;
+    transition: opacity 0.28s ease;
 }
 
-/* Arrow */
+.image-container img.is-fading {
+    opacity: 0;
+}
+
+/* Subtle vignette so white UI reads on any photo */
+.image-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(20, 24, 31, 0.55) 0%, rgba(20, 24, 31, 0) 18%),
+                linear-gradient(to bottom, rgba(20, 24, 31, 0.35) 0%, rgba(20, 24, 31, 0) 22%);
+}
+
+/* ================= Arrows ================= */
 
 .arrow {
     position: absolute;
@@ -81,15 +159,15 @@ main {
     top: 50%;
     transform: translateY(-50%);
 
-    width: 82px;
-    height: 82px;
+    width: 56px;
+    height: 56px;
 
-    border: 5px solid black;
+    border: none;
     border-radius: 50%;
 
-    background: white;
-
-    font-size: 55px;
+    background: rgba(20, 24, 31, 0.55);
+    color: var(--paper);
+    backdrop-filter: blur(2px);
 
     cursor: pointer;
 
@@ -97,56 +175,161 @@ main {
     align-items: center;
     justify-content: center;
 
+    transition: background 0.15s ease, transform 0.15s ease, color 0.15s ease;
+
     z-index: 5;
 }
 
 .arrow:hover {
-    background: #eeeeee;
+    background: var(--amber);
+    color: var(--ink);
+}
+
+.arrow:focus-visible {
+    outline: 3px solid var(--amber);
+    outline-offset: 3px;
 }
 
 .arrow:active {
-    transform: translateY(-50%) scale(0.95);
+    transform: translateY(-50%) scale(0.92);
 }
 
 .left {
-    left: 25px;
+    left: 22px;
 }
 
 .right {
-    right: 25px;
+    right: 22px;
 }
 
-/* Bottom buttons */
+/* ================= Dots ================= */
+
+.dots {
+    position: absolute;
+    bottom: 148px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 10px;
+
+    z-index: 6;
+}
+
+.dots button {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+
+    background: var(--teal);
+    opacity: 0.7;
+
+    cursor: pointer;
+
+    transition: background 0.15s ease, opacity 0.15s ease, transform 0.15s ease;
+}
+
+.dots button:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.dots button.active {
+    background: var(--amber);
+    opacity: 1;
+    transform: scale(1.25);
+}
+
+/* ================= Bottom buttons ================= */
 
 .options {
     position: absolute;
 
-    bottom: 65px;
+    bottom: 32px;
     left: 50%;
 
     transform: translateX(-50%);
 
     display: flex;
-    gap: 150px;
+    gap: 14px;
 
     z-index: 6;
 }
 
 .options button {
-    width: 100px;
-    height: 58px;
+    min-width: 116px;
+    height: 46px;
+    padding: 0 20px;
 
-    border: 5px solid black;
+    border: var(--line) solid var(--ink);
+    border-radius: 3px;
 
-    background: white;
+    background: var(--paper);
+    color: var(--ink);
+
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 
     cursor: pointer;
+
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
 }
 
 .options button:hover {
-    background: #eeeeee;
+    background: var(--amber);
+    border-color: var(--amber);
+}
+
+.options button:focus-visible {
+    outline: 3px solid var(--amber);
+    outline-offset: 3px;
 }
 
 .options button:active {
-    transform: scale(0.95);
+    transform: scale(0.96);
+}
+
+/* ================= Responsive ================= */
+
+@media (max-width: 640px) {
+    .logo {
+        font-size: 15px;
+    }
+
+    .logo span {
+        display: none;
+    }
+
+    .arrow {
+        width: 44px;
+        height: 44px;
+    }
+
+    .left {
+        left: 10px;
+    }
+
+    .right {
+        right: 10px;
+    }
+
+    .options {
+        gap: 8px;
+    }
+
+    .options button {
+        min-width: 0;
+        padding: 0 12px;
+        font-size: 12px;
+        height: 40px;
+    }
+
+    .dots {
+        bottom: 122px;
+    }
 }
