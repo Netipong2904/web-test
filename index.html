@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Game</title>
+    <title>ศูนย์กีฬาเฉลิมพระเกียรติ</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -11,31 +15,37 @@
 <body>
 
     <header>
-        <div class="logo">ศูนย์กีฬาเฉลิมพระเกียรติ</div>
+        <div class="logo">ศูนย์กีฬา<span>เฉลิมพระเกียรติ</span></div>
+        <div class="counter" aria-live="polite">
+            <span id="counterCurrent">01</span><span class="counter-sep">/</span><span id="counterTotal">03</span>
+        </div>
     </header>
 
     <main>
 
         <!-- รูปภาพ -->
         <div class="image-container">
-            <img id="mainImage" src="img/pic1.jpg" alt="Image">
+            <img id="mainImage" src="img/pic1.jpg" alt="ภาพบรรยากาศศูนย์กีฬาเฉลิมพระเกียรติ">
         </div>
 
         <!-- ปุ่มซ้าย -->
-        <button class="arrow left" onclick="previousImage()">
-            ←
+        <button class="arrow left" onclick="previousImage()" aria-label="ภาพก่อนหน้า">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
 
         <!-- ปุ่มขวา -->
-        <button class="arrow right" onclick="nextImage()">
-            →
+        <button class="arrow right" onclick="nextImage()" aria-label="ภาพถัดไป">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </button>
+
+        <!-- จุดบอกตำแหน่งภาพ -->
+        <div class="dots" id="dots"></div>
 
         <!-- ปุ่มด้านล่าง -->
         <div class="options">
             <button>MAP</button>
-            <button>button</button>
-            <button>button</button>
+            <button>ตารางเวลา</button>
+            <button>ติดต่อ</button>
         </div>
 
     </main>
