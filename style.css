@@ -25,6 +25,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
+    height: 100dvh;
     overflow: hidden;
 }
 
@@ -51,12 +52,12 @@ header {
     left: 0;
 
     width: 100%;
-    height: 52px;
+    height: clamp(44px, 8vh, 56px);
 
     display: flex;
     align-items: center;
 
-    padding: 0 18px;
+    padding: 0 clamp(12px, 3vw, 22px);
 
     border-bottom: var(--line) solid var(--ink);
 
@@ -69,7 +70,7 @@ header {
 .logo {
     font-family: 'Oswald', sans-serif;
     font-weight: 600;
-    font-size: 19px;
+    font-size: clamp(13px, 3.2vw, 19px);
     letter-spacing: 1px;
     text-transform: uppercase;
     white-space: nowrap;
@@ -88,6 +89,7 @@ main {
 
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
 
     display: flex;
     align-items: center;
@@ -97,6 +99,7 @@ main {
 .image-container {
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
 
     overflow: hidden;
 
@@ -137,8 +140,8 @@ main {
     top: 50%;
     transform: translateY(-50%);
 
-    width: 56px;
-    height: 56px;
+    width: clamp(38px, 8vw, 56px);
+    height: clamp(38px, 8vw, 56px);
 
     border: none;
     border-radius: 50%;
@@ -158,6 +161,11 @@ main {
     z-index: 5;
 }
 
+.arrow svg {
+    width: clamp(16px, 3.6vw, 26px);
+    height: clamp(16px, 3.6vw, 26px);
+}
+
 .arrow:hover {
     background: var(--amber);
     color: var(--ink);
@@ -173,30 +181,30 @@ main {
 }
 
 .left {
-    left: 22px;
+    left: clamp(8px, 2.5vw, 22px);
 }
 
 .right {
-    right: 22px;
+    right: clamp(8px, 2.5vw, 22px);
 }
 
 /* ================= Dots ================= */
 
 .dots {
     position: absolute;
-    bottom: 148px;
+    bottom: clamp(96px, 22vh, 148px);
     left: 50%;
     transform: translateX(-50%);
 
     display: flex;
-    gap: 10px;
+    gap: 8px;
 
     z-index: 6;
 }
 
 .dots button {
-    width: 9px;
-    height: 9px;
+    width: clamp(7px, 1.6vw, 9px);
+    height: clamp(7px, 1.6vw, 9px);
     padding: 0;
     border: none;
     border-radius: 50%;
@@ -225,13 +233,17 @@ main {
 .options {
     position: absolute;
 
-    bottom: 32px;
+    bottom: clamp(16px, 4.5vh, 32px);
     left: 50%;
 
     transform: translateX(-50%);
 
     display: flex;
-    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(8px, 2vw, 14px);
+
+    width: min(94vw, 640px);
 
     z-index: 6;
 }
@@ -241,11 +253,12 @@ main {
 
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: clamp(6px, 1.4vw, 10px);
 
-    min-width: 108px;
-    height: 50px;
-    padding: 0 22px 0 16px;
+    flex: 0 1 auto;
+
+    height: clamp(40px, 8vh, 50px);
+    padding: 0 clamp(12px, 3vw, 22px) 0 clamp(10px, 2.4vw, 16px);
 
     border: none;
     border-radius: 999px;
@@ -266,8 +279,8 @@ main {
     align-items: center;
     justify-content: center;
 
-    width: 30px;
-    height: 30px;
+    width: clamp(22px, 5vw, 30px);
+    height: clamp(22px, 5vw, 30px);
     border-radius: 50%;
 
     background: var(--ink);
@@ -276,10 +289,15 @@ main {
     flex-shrink: 0;
 }
 
+.option-icon svg {
+    width: clamp(14px, 3.2vw, 20px);
+    height: clamp(14px, 3.2vw, 20px);
+}
+
 .option-label {
     font-family: 'Oswald', sans-serif;
     font-weight: 600;
-    font-size: 13px;
+    font-size: clamp(10.5px, 2.6vw, 13px);
     letter-spacing: 1.2px;
     text-transform: uppercase;
     white-space: nowrap;
@@ -307,49 +325,69 @@ main {
 
 /* ================= Responsive ================= */
 
-@media (max-width: 640px) {
-    .logo {
-        font-size: 15px;
-    }
-
+/* Very small phones: simplify further */
+@media (max-width: 380px) {
     .logo span {
         display: none;
     }
 
-    .arrow {
-        width: 44px;
-        height: 44px;
-    }
-
-    .left {
-        left: 10px;
-    }
-
-    .right {
-        right: 10px;
-    }
-
-    .options {
-        gap: 8px;
+    .option-label {
+        display: none;
     }
 
     .option-btn {
-        min-width: 0;
-        padding: 0 14px 0 10px;
-        height: 42px;
-        gap: 7px;
+        padding: 0 clamp(10px, 3vw, 14px);
+        gap: 0;
     }
+}
 
-    .option-icon {
-        width: 24px;
-        height: 24px;
-    }
-
-    .option-label {
-        font-size: 11px;
+/* Short viewport (landscape phones): tighten vertical rhythm */
+@media (max-height: 480px) {
+    header {
+        height: 38px;
     }
 
     .dots {
-        bottom: 122px;
+        bottom: 74px;
+    }
+
+    .options {
+        bottom: 12px;
+    }
+
+    .option-btn {
+        height: 36px;
+    }
+
+    .option-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Large / ultra-wide screens: cap growth so controls stay proportional */
+@media (min-width: 1600px) {
+    .logo {
+        font-size: 22px;
+    }
+
+    .arrow {
+        width: 64px;
+        height: 64px;
+    }
+
+    .option-btn {
+        height: 54px;
+    }
+
+    .option-label {
+        font-size: 14px;
+    }
+}
+
+/* Foldables / tablets in portrait: give the options row more breathing room */
+@media (min-width: 700px) and (max-width: 1024px) {
+    .options {
+        width: min(90vw, 520px);
     }
 }
