@@ -9,12 +9,6 @@ let isAnimating = false;
 
 const mainImage = document.getElementById("mainImage");
 const dotsContainer = document.getElementById("dots");
-const counterCurrent = document.getElementById("counterCurrent");
-const counterTotal = document.getElementById("counterTotal");
-
-function pad(n) {
-    return String(n + 1).padStart(2, "0");
-}
 
 function buildDots() {
     dotsContainer.innerHTML = "";
@@ -24,14 +18,12 @@ function buildDots() {
         dot.addEventListener("click", () => goToImage(i));
         dotsContainer.appendChild(dot);
     });
-    counterTotal.textContent = pad(images.length - 1);
 }
 
 function updateUI() {
     document.querySelectorAll(".dots button").forEach((dot, i) => {
         dot.classList.toggle("active", i === currentImage);
     });
-    counterCurrent.textContent = pad(currentImage);
 }
 
 function showImage() {
