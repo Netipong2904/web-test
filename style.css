@@ -14,6 +14,7 @@
     --amber-deep: #c97f1e;
     --teal: #2f6f6b;
     --line: 4px;
+    --gold-grad: linear-gradient(135deg, #fbe08a 0%, #e8a33d 45%, #a9691b 100%);
 }
 
 * {
@@ -50,6 +51,48 @@ body {
     }
 }
 
+/* ================= Animation library ================= */
+
+@keyframes slideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes shimmerSweep {
+    from { left: -40%; }
+    to { left: 130%; }
+}
+
+@keyframes fadeScaleIn {
+    from { opacity: 0; transform: scale(1.18); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes kenburns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.09); }
+}
+
+@keyframes riseIn {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes dotGlowPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(232, 163, 61, 0.65); }
+    50% { box-shadow: 0 0 0 6px rgba(232, 163, 61, 0); }
+}
+
+@keyframes spotlightBreathe {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.85; }
+}
+
 /* ================= Header ================= */
 
 header {
@@ -66,11 +109,30 @@ header {
     padding: 0 clamp(12px, 3vw, 22px);
 
     border-bottom: var(--line) solid var(--ink);
+    box-shadow: 0 1px 0 0 #d99a2e;
 
     background: var(--paper);
     color: var(--ink);
 
     z-index: 10;
+
+    overflow: hidden;
+
+    animation: slideDown 0.7s cubic-bezier(.16,1,.3,1) both;
+}
+
+header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -40%;
+    width: 40%;
+    height: 100%;
+
+    background: linear-gradient(115deg, transparent, rgba(232, 163, 61, 0.5), transparent);
+
+    animation: shimmerSweep 2.6s ease-out 0.9s 1;
+    pointer-events: none;
 }
 
 .logo {
@@ -85,7 +147,10 @@ header {
 }
 
 .logo span {
-    color: var(--amber-deep);
+    background: var(--gold-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 /* ================= Main / Image ================= */
@@ -118,20 +183,27 @@ main {
 
     opacity: 1;
     transition: opacity 0.28s ease;
+
+    animation: fadeScaleIn 1.1s cubic-bezier(.16,1,.3,1) both,
+               kenburns 16s ease-in-out 1.1s infinite alternate;
+    transform-origin: center;
 }
 
 .image-container img.is-fading {
     opacity: 0;
 }
 
-/* Subtle vignette so white UI reads on any photo */
+/* Stadium-spotlight vignette: warm glow at center, deep frame at edges */
 .image-container::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: linear-gradient(to top, rgba(20, 24, 31, 0.55) 0%, rgba(20, 24, 31, 0) 18%),
-                linear-gradient(to bottom, rgba(20, 24, 31, 0.35) 0%, rgba(20, 24, 31, 0) 22%);
+    background:
+        radial-gradient(ellipse 65% 55% at 50% 42%, rgba(232, 163, 61, 0.16) 0%, rgba(232, 163, 61, 0) 60%),
+        linear-gradient(to top, rgba(20, 24, 31, 0.6) 0%, rgba(20, 24, 31, 0) 20%),
+        linear-gradient(to bottom, rgba(20, 24, 31, 0.4) 0%, rgba(20, 24, 31, 0) 24%);
+    animation: spotlightBreathe 6s ease-in-out infinite;
 }
 
 /* ================= Arrows ================= */
@@ -158,9 +230,11 @@ main {
     align-items: center;
     justify-content: center;
 
-    transition: background 0.15s ease, transform 0.15s ease, color 0.15s ease;
+    transition: background 0.15s ease, transform 0.15s ease, color 0.15s ease, box-shadow 0.2s ease;
 
     z-index: 5;
+
+    animation: fadeIn 0.8s ease 0.6s both;
 }
 
 .arrow svg {
@@ -169,8 +243,9 @@ main {
 }
 
 .arrow:hover {
-    background: var(--amber);
+    background: var(--gold-grad);
     color: var(--ink);
+    box-shadow: 0 0 26px 4px rgba(232, 163, 61, 0.55);
 }
 
 .arrow:focus-visible {
@@ -202,6 +277,8 @@ main {
     gap: 8px;
 
     z-index: 6;
+
+    animation: fadeIn 0.8s ease 0.9s both;
 }
 
 .dots button {
@@ -225,9 +302,10 @@ main {
 }
 
 .dots button.active {
-    background: var(--amber);
+    background: var(--gold-grad);
     opacity: 1;
     transform: scale(1.25);
+    animation: dotGlowPulse 2.4s ease-in-out infinite;
 }
 
 /* ================= Bottom buttons ================= */
@@ -264,7 +342,8 @@ main {
 
     border: none;
     border-radius: 999px;
-    border-top: 3px solid var(--amber);
+    border-top: 3px solid transparent;
+    border-image: var(--gold-grad) 1;
 
     background: var(--paper);
     color: var(--ink);
@@ -273,8 +352,14 @@ main {
 
     cursor: pointer;
 
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.15s ease;
+
+    animation: riseIn 0.6s cubic-bezier(.16,1,.3,1) both;
 }
+
+.option-btn:nth-child(1) { animation-delay: 0.55s; }
+.option-btn:nth-child(2) { animation-delay: 0.68s; }
+.option-btn:nth-child(3) { animation-delay: 0.81s; }
 
 .option-icon {
     display: flex;
@@ -289,6 +374,8 @@ main {
     color: var(--amber);
 
     flex-shrink: 0;
+
+    transition: background 0.15s ease, color 0.15s ease;
 }
 
 .option-icon svg {
@@ -307,11 +394,11 @@ main {
 
 .option-btn:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 0 var(--ink), 0 16px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 0 var(--ink), 0 16px 20px rgba(0, 0, 0, 0.4), 0 0 24px rgba(232, 163, 61, 0.45);
 }
 
 .option-btn:hover .option-icon {
-    background: var(--amber);
+    background: var(--gold-grad);
     color: var(--ink);
 }
 
