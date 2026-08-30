@@ -1,12 +1,3 @@
-/* ===================================================
-   Token system
-   Ink   #14181f   deep near-black navy (frames, header)
-   Paper #f5f3ee   warm off-white
-   Amber #e8a33d   track-lane accent
-   Amber-deep #c97f1e  hover / active
-   Teal  #2f6f6b   secondary accent (inactive dots)
-   =================================================== */
-
 :root {
     --ink: #14181f;
     --paper: #f5f3ee;
@@ -49,9 +40,6 @@ body {
         animation-duration: 0.01ms !important;
     }
 }
-
-/* ================= Header ================= */
-
 header {
     position: fixed;
     top: 0;
@@ -87,9 +75,6 @@ header {
 .logo span {
     color: var(--amber-deep);
 }
-
-/* ================= Main / Image ================= */
-
 main {
     position: fixed;
     inset: 0;
@@ -123,8 +108,6 @@ main {
 .image-container img.is-fading {
     opacity: 0;
 }
-
-/* Subtle vignette so white UI reads on any photo */
 .image-container::after {
     content: "";
     position: absolute;
@@ -133,9 +116,6 @@ main {
     background: linear-gradient(to top, rgba(20, 24, 31, 0.55) 0%, rgba(20, 24, 31, 0) 18%),
                 linear-gradient(to bottom, rgba(20, 24, 31, 0.35) 0%, rgba(20, 24, 31, 0) 22%);
 }
-
-/* ================= Arrows ================= */
-
 .arrow {
     position: absolute;
 
@@ -189,9 +169,6 @@ main {
 .right {
     right: clamp(8px, 2.5vw, 22px);
 }
-
-/* ================= Dots ================= */
-
 .dots {
     position: absolute;
     bottom: clamp(96px, 22vh, 148px);
@@ -229,9 +206,6 @@ main {
     opacity: 1;
     transform: scale(1.25);
 }
-
-/* ================= Bottom buttons ================= */
-
 .options {
     position: absolute;
 
@@ -325,9 +299,6 @@ main {
     box-shadow: 0 3px 0 var(--ink), 0 6px 10px rgba(0, 0, 0, 0.35);
 }
 
-/* ================= Responsive ================= */
-
-/* Very small phones: simplify further */
 @media (max-width: 380px) {
     .logo span {
         display: none;
@@ -343,7 +314,6 @@ main {
     }
 }
 
-/* Short viewport (landscape phones): tighten vertical rhythm */
 @media (max-height: 480px) {
     header {
         height: 38px;
@@ -387,7 +357,6 @@ main {
     }
 }
 
-/* Foldables / tablets in portrait: give the options row more breathing room */
 @media (min-width: 700px) and (max-width: 1024px) {
     .options {
         width: min(90vw, 520px);
