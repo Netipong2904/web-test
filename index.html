@@ -19,26 +19,16 @@
     </header>
 
     <main>
-
-        <!-- รูปภาพ -->
         <div class="image-container">
-            <img id="mainImage" src="img/pic1.jpg" alt="ภาพบรรยากาศศูนย์กีฬาเฉลิมพระเกียรติ">
+            <img id="mainImage" src="img/pic1.jpg" alt="PreviousPic">
         </div>
-
-        <!-- ปุ่มซ้าย -->
-        <button class="arrow left" onclick="previousImage()" aria-label="ภาพก่อนหน้า">
+        <button class="arrow left" onclick="previousImage()" aria-label="PreviousPic">
             <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-
-        <!-- ปุ่มขวา -->
-        <button class="arrow right" onclick="nextImage()" aria-label="ภาพถัดไป">
+        <button class="arrow right" onclick="nextImage()" aria-label="NextPic">
             <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </button>
-
-        <!-- จุดบอกตำแหน่งภาพ -->
         <div class="dots" id="dots"></div>
-
-        <!-- ปุ่มด้านล่าง -->
         <div class="options">
             <button class="option-btn">
                 <span class="option-icon">
@@ -50,19 +40,16 @@
                 <span class="option-icon">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
                 </span>
-                <span class="option-label">ตารางเวลา</span>
+                <span class="option-label">BUTTON</span>
             </button>
             <button class="option-btn">
                 <span class="option-icon">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.28-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/></svg>
                 </span>
-                <span class="option-label">ติดต่อ</span>
+                <span class="option-label">BUTTON</span>
             </button>
         </div>
-
     </main>
-
     <script src="script.js"></script>
-
 </body>
 </html>
