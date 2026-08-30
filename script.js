@@ -61,8 +61,6 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") previousImage();
 });
 
-// แก้ปัญหา Chrome bfcache: บังคับคำนวณความสูงจอใหม่
-// ทุกครั้งที่หน้าเว็บกลับมา active (สลับแท็บ/พักแอปแล้วเปิดใหม่)
 function setAppHeight() {
     document.documentElement.style.setProperty("--app-height", `${window.innerHeight}px`);
 }
